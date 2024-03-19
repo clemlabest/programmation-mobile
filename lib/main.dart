@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'app_content.dart'; // Assurez-vous d'importer app_content.dart
+import 'app_content.dart'; // Assurez-vous que ce chemin est correct.
 
 void main() {
-  runApp(buildHomePage()); // Appelle la fonction depuis app_content.dart
+  runApp(const MyApp());
 }
