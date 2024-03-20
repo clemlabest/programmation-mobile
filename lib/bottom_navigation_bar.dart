@@ -14,9 +14,22 @@ class CustomBottomNavigationBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BottomNavigationBar(
-      items: <BottomNavigationBarItem>[
-        BottomNavigationBarItem(
+    return ClipRRect(
+      borderRadius: const BorderRadius.only(
+        topLeft: Radius.circular(20.0),
+        topRight: Radius.circular(20.0),
+      ),
+      child: Container(
+        decoration: const BoxDecoration(
+          color: Color(0xFF0F1E2B),
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(20.0),
+            topRight: Radius.circular(20.0),
+          ),
+        ),
+        child: BottomNavigationBar(
+          items: <BottomNavigationBarItem>[
+            BottomNavigationBarItem(
           icon: _buildSvgIcon(context, "ressources/BottomNavigationBar/ic_home.svg", 0),
           label: 'Accueil',
         ),
@@ -36,23 +49,28 @@ class CustomBottomNavigationBar extends StatelessWidget {
           icon: _buildSvgIcon(context, "ressources/BottomNavigationBar/ic_search.svg", 4),
           label: 'Recherche',
         ),
-      ],
-      currentIndex: selectedIndex,
-      selectedItemColor: const Color(0xFF12273C),
-      unselectedItemColor: const Color(0xFF778BA8),
-      onTap: onItemTapped,
-      backgroundColor: const Color(0xFF0F1E2B),
-      type: BottomNavigationBarType.fixed,
+            // ... the rest of your items ...
+          ],
+          currentIndex: selectedIndex,
+          selectedItemColor: const Color(0xFF12273C),
+          unselectedItemColor: const Color(0xFF778BA8),
+          onTap: onItemTapped,
+          backgroundColor: Colors.transparent, // Set to transparent to see the Container color
+          type: BottomNavigationBarType.fixed,
+          elevation: 0, // Remove shadow if needed
+        ),
+      ),
     );
   }
 
   Widget _buildSvgIcon(BuildContext context, String assetName, int index) {
-  return SvgPicture.asset(
-    assetName,
-    width: 24.0,
-    height: 24.0,
-    color: selectedIndex == index ? const Color(0xFF12273C) : const Color(0xFF778BA8),
-  );
+    return SvgPicture.asset(
+      assetName,
+      width: 24.0,
+      height: 24.0,
+      color: selectedIndex == index ? const Color(0xFF12273C) : const Color(0xFF778BA8),
+    );
+  }
 }
-}
+
 
