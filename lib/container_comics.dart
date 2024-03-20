@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class SeriesSectionHeader extends StatelessWidget {
-  const SeriesSectionHeader({super.key});
+class ComicsSectionHeader extends StatelessWidget {
+  const ComicsSectionHeader({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +33,7 @@ class SeriesSectionHeader extends StatelessWidget {
                 ),
                 // Le texte
                 Text(
-                  'Séries populaires',
+                  'Comics populaires',
                   style: GoogleFonts.nunito(
                     color: Colors.white,
                     fontWeight: FontWeight.bold,

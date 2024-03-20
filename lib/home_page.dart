@@ -1,4 +1,6 @@
 // my_home_page.dart
+import 'package:comics_application/container_comics.dart';
+import 'package:comics_application/container_films.dart';
 import 'package:flutter/material.dart';
 import 'appbar.dart'; // Assurez-vous que CustomAppBar est défini et importé
 import 'container_series.dart'; // Assurez-vous que SeriesSectionHeader est défini et importé
@@ -29,6 +31,8 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           children: [
             SeriesSectionHeader(), // Utilisez SeriesSectionHeader pour l'en-tête de section
+            ComicsSectionHeader(),
+            FilmsSectionHeader(),
             // Ici, vous pouvez ajouter d'autres widgets pour le contenu de votre page
           ],
         ),
