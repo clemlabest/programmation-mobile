@@ -10,8 +10,10 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
       title: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Expanded(
+          Padding(
+            padding: const EdgeInsets.only(left: 16.0), // Ajustez la valeur pour déplacer le texte vers la droite
             child: Text(
               'Bienvenue !',
               style: GoogleFonts.nunito(
@@ -21,18 +23,22 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
               ),
             ),
           ),
-          SvgPicture.asset(
-            "ressources/Logo.svg",
-            width: 121.85,
-            height: 159.68,
+          Container(
+            margin: const EdgeInsets.only(top: 70), // Réduisez si nécessaire
+            child: SvgPicture.asset(
+              "ressources/Logo.svg",
+              width: 121.85, // Ajustez en fonction de la taille souhaitée
+              height: 159.68, // Ajustez en fonction de la taille souhaitée
+            ),
           ),
         ],
       ),
       backgroundColor: Colors.transparent,
       elevation: 0,
+      toolbarHeight: 220, // Assurez-vous que cette hauteur est suffisante pour l'image
     );
   }
 
   @override
-  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
+  Size get preferredSize => const Size.fromHeight(90); // Assurez-vous que cette hauteur correspond à la hauteur de votre AppBar
 }

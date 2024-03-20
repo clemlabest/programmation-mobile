@@ -27,8 +27,10 @@ class CustomBottomNavigationBar extends StatelessWidget {
             topRight: Radius.circular(20.0),
           ),
         ),
-        child: BottomNavigationBar(
-          items: <BottomNavigationBarItem>[
+        child: SizedBox(
+          height: 70, // Augmentez la hauteur ici
+          child: BottomNavigationBar(
+            items: <BottomNavigationBarItem>[
             BottomNavigationBarItem(
           icon: _buildSvgIcon(context, "ressources/BottomNavigationBar/ic_home.svg", 0),
           label: 'Accueil',
@@ -51,13 +53,14 @@ class CustomBottomNavigationBar extends StatelessWidget {
         ),
             // ... the rest of your items ...
           ],
-          currentIndex: selectedIndex,
-          selectedItemColor: const Color(0xFF12273C),
-          unselectedItemColor: const Color(0xFF778BA8),
-          onTap: onItemTapped,
-          backgroundColor: Colors.transparent, // Set to transparent to see the Container color
-          type: BottomNavigationBarType.fixed,
-          elevation: 0, // Remove shadow if needed
+            currentIndex: selectedIndex,
+            selectedItemColor: const Color(0xFF12273C),
+            unselectedItemColor: const Color(0xFF778BA8),
+            onTap: onItemTapped,
+            backgroundColor: Colors.transparent, // Pour voir la couleur du Container
+            type: BottomNavigationBarType.fixed,
+            elevation: 0, // Enlevez l'ombre si nécessaire
+          ),
         ),
       ),
     );
@@ -72,5 +75,3 @@ class CustomBottomNavigationBar extends StatelessWidget {
     );
   }
 }
-
-
