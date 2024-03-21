@@ -42,18 +42,19 @@ class ComicsSectionHeader extends StatelessWidget {
                 ),
               ],
             ),
-            // Le bouton "Voir plus" reste inchangé
-            Container(
-              decoration: BoxDecoration(
-                color: const Color(0xFF0F1921).withOpacity(0.5),
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: TextButton(
-                onPressed: () {},
-                child: Text(
-                  'Voir plus',
-                  style: GoogleFonts.nunito(color: Colors.white),
+            // Modification du bouton "Voir plus" pour le rendre plus petit
+            TextButton(
+              onPressed: () {},
+              style: TextButton.styleFrom(
+                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 4), // Réduit le padding du bouton
+                backgroundColor: const Color(0xFF0F1921).withOpacity(0.5), // Couleur de fond
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10), // Rayon de la bordure arrondie
                 ),
+              ),
+              child: Text(
+                'Voir plus',
+                style: GoogleFonts.nunito(color: Colors.white),
               ),
             ),
           ],

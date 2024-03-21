@@ -1,6 +1,6 @@
 // app_content.dart
 import 'package:flutter/material.dart';
-import 'home_page.dart'; // Assurez-vous d'avoir créé ce fichier.
+import 'Interfaces/Accueil/home_page.dart'; // Assurez-vous d'avoir créé ce fichier.
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
