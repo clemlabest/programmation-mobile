@@ -1,6 +1,9 @@
 // bottom_navigation_bar.dart
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:comics_application/BloC/navigation_bloc.dart';
+import 'package:comics_application/BloC/navigation_event.dart';
 
 class CustomBottomNavigationBar extends StatelessWidget {
   final int selectedIndex;
@@ -12,8 +15,23 @@ class CustomBottomNavigationBar extends StatelessWidget {
     required this.onItemTapped,
   });
 
+  // Déplacez cette méthode hors du widget, car elle ne doit pas être constante.
+  Widget _buildSvgIcon(BuildContext context, String assetName, int index) {
+    return SvgPicture.asset(
+      assetName,
+      width: 24.0,
+      height: 24.0,
+      color: selectedIndex == index ? const Color(0xFF12273C) : const Color(0xFF778BA8),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
+    // Utilisation du BLoC pour réagir aux interactions avec la barre de navigation
+    void onItemTapped(int index) {
+      context.read<NavigationBloc>().add(NavigationTappedEvent(index));
+    }
+
     return ClipRRect(
       borderRadius: const BorderRadius.only(
         topLeft: Radius.circular(20.0),
@@ -28,50 +46,40 @@ class CustomBottomNavigationBar extends StatelessWidget {
           ),
         ),
         child: SizedBox(
-          height: 70, // Augmentez la hauteur ici
+          height: 70,
           child: BottomNavigationBar(
             items: <BottomNavigationBarItem>[
-            BottomNavigationBarItem(
-          icon: _buildSvgIcon(context, "ressources/BottomNavigationBar/ic_home.svg", 0),
-          label: 'Accueil',
-        ),
-        BottomNavigationBarItem(
-          icon: _buildSvgIcon(context, "ressources/BottomNavigationBar/ic_books.svg", 1),
-          label: 'Comics',
-        ),
-        BottomNavigationBarItem(
-          icon: _buildSvgIcon(context, "ressources/BottomNavigationBar/ic_tv.svg", 2),
-          label: 'Séries',
-        ),
-        BottomNavigationBarItem(
-          icon: _buildSvgIcon(context, "ressources/BottomNavigationBar/ic_movie.svg", 3),
-          label: 'Films',
-        ),
-        BottomNavigationBarItem(
-          icon: _buildSvgIcon(context, "ressources/BottomNavigationBar/ic_search.svg", 4),
-          label: 'Recherche',
-        ),
-            // ... the rest of your items ...
-          ],
+              BottomNavigationBarItem(
+                icon: _buildSvgIcon(context, "ressources/BottomNavigationBar/ic_home.svg", 0),
+                label: 'Accueil',
+              ),
+              BottomNavigationBarItem(
+                icon: _buildSvgIcon(context, "ressources/BottomNavigationBar/ic_books.svg", 1),
+                label: 'Comics',
+              ),
+              BottomNavigationBarItem(
+                icon: _buildSvgIcon(context, "ressources/BottomNavigationBar/ic_tv.svg", 2),
+                label: 'Séries',
+              ),
+              BottomNavigationBarItem(
+                icon: _buildSvgIcon(context, "ressources/BottomNavigationBar/ic_movie.svg", 3),
+                label: 'Films',
+              ),
+              BottomNavigationBarItem(
+                icon: _buildSvgIcon(context, "ressources/BottomNavigationBar/ic_search.svg", 4),
+                label: 'Recherche',
+              ),
+            ],
             currentIndex: selectedIndex,
             selectedItemColor: const Color(0xFF12273C),
             unselectedItemColor: const Color(0xFF778BA8),
             onTap: onItemTapped,
-            backgroundColor: Colors.transparent, // Pour voir la couleur du Container
+            backgroundColor: Colors.transparent,
             type: BottomNavigationBarType.fixed,
-            elevation: 0, // Enlevez l'ombre si nécessaire
+            elevation: 0,
           ),
         ),
       ),
-    );
-  }
-
-  Widget _buildSvgIcon(BuildContext context, String assetName, int index) {
-    return SvgPicture.asset(
-      assetName,
-      width: 24.0,
-      height: 24.0,
-      color: selectedIndex == index ? const Color(0xFF12273C) : const Color(0xFF778BA8),
     );
   }
 }
