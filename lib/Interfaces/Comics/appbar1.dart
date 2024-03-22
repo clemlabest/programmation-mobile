@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class CustomAppBar1 extends StatelessWidget implements PreferredSizeWidget {
@@ -14,7 +13,7 @@ class CustomAppBar1 extends StatelessWidget implements PreferredSizeWidget {
           Padding(
             padding: const EdgeInsets.only(left: 16.0), // Ajustez la valeur pour déplacer le texte vers la droite
             child: Text(
-              'Bienvenue !',
+              'Comics les plus\npopulaires',
               style: GoogleFonts.nunito(
                 fontWeight: FontWeight.bold,
                 fontSize: 30,
@@ -22,14 +21,7 @@ class CustomAppBar1 extends StatelessWidget implements PreferredSizeWidget {
               ),
             ),
           ),
-          Container(
-            margin: const EdgeInsets.only(top: 70), // Réduisez si nécessaire
-            child: SvgPicture.asset(
-              "ressources/Logo.svg",
-              width: 121.85, // Ajustez en fonction de la taille souhaitée
-              height: 159.68, // Ajustez en fonction de la taille souhaitée
-            ),
-          ),
+          
         ],
       ),
       backgroundColor: Colors.transparent,

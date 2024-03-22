@@ -3,86 +3,91 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:comics_application/BloC/navigation_bloc.dart';
 import 'package:comics_application/BloC/navigation_event.dart';
 import 'package:comics_application/BloC/navigation_state.dart';
-import 'package:comics_application/Interfaces/Accueil/appbar.dart';
-import 'package:comics_application/Interfaces/Comics/appbar1.dart';
-import 'package:comics_application/Interfaces/Series/appbar2.dart';
-import 'package:comics_application/Interfaces/Films/appbar3.dart';
-import 'package:comics_application/Interfaces/Recherche/appbar4.dart';
 import 'package:comics_application/Interfaces/bottom_navigation_bar.dart';
 import 'package:comics_application/Interfaces/Comics/comics_page.dart';
 import 'package:comics_application/Interfaces/Series/series_page.dart';
 import 'package:comics_application/Interfaces/Films/films_page.dart';
 import 'package:comics_application/Interfaces/Recherche/recherche_page.dart';
+// Supposant que CustomHeader est le nouveau widget d'en-tête sans AppBar
+import 'package:comics_application/Interfaces/Accueil/appbar.dart';
 import 'package:comics_application/Interfaces/Accueil/container_comics.dart';
 import 'package:comics_application/Interfaces/Accueil/container_series.dart';
 import 'package:comics_application/Interfaces/Accueil/container_films.dart';
 
-class MyHomePage extends StatefulWidget {
+import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+
+class MyHomePage extends StatelessWidget {
   const MyHomePage({super.key});
 
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFF15232E),
-      appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(kToolbarHeight),
-        child: BlocBuilder<NavigationBloc, NavigationState>(
-          builder: (context, state) {
-            if (state is NavigationSelectedState) {
-              switch (state.selectedIndex) {
-                case 1:
-                  return const CustomAppBar1();
-                case 2:
-                  return const CustomAppBar2();
-                case 3:
-                  return const CustomAppBar3();
-                case 4:
-                  return const CustomAppBar4();
-                default:
-                  return const CustomAppBar();
-              }
-            }
-            return const CustomAppBar();
-          },
-        ),
-      ),
       body: BlocBuilder<NavigationBloc, NavigationState>(
         builder: (context, state) {
-          if (state is NavigationSelectedState) {
+          Widget pageContent = const SizedBox(); // Définir une valeur par défaut pour pageContent
+
+          if (state is NavigationInitialState) {
+            // Contenu par défaut pour l'accueil
+            pageContent = const SingleChildScrollView(
+              child: Padding(
+                padding: EdgeInsets.only(top: 100), // Ajout d'un padding pour décaler vers le bas
+                child: Column(
+                  children: [
+                    SeriesSectionHeader(),
+                    ComicsSectionHeader(),
+                    FilmsSectionHeader(),
+                  ],
+                ),
+              ),
+            );
+          } else if (state is NavigationSelectedState) {
             switch (state.selectedIndex) {
               case 1:
-                return const MyComicsPage();
+                pageContent = const MyComicsPage();
+                break;
               case 2:
-                return const MySeriesPage();
+                pageContent = const MySeriesPage();
+                break;
               case 3:
-                return const MyFilmsPage();
+                pageContent = const MyFilmsPage();
+                break;
               case 4:
-                return const MySearchPage();
+                pageContent = const MySearchPage();
+                break;
               default:
-                return const SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      SeriesSectionHeader(),
-                      ComicsSectionHeader(),
-                      FilmsSectionHeader(),
-                    ],
+                // Si l'index n'est pas géré, on affiche le contenu par défaut
+                pageContent = const SingleChildScrollView(
+                  child: Padding(
+                    padding: EdgeInsets.only(top: 100),
+                    child: Column(
+                      children: [
+                        SeriesSectionHeader(),
+                        ComicsSectionHeader(),
+                        FilmsSectionHeader(),
+                      ],
+                    ),
                   ),
                 );
             }
           }
-          return const SingleChildScrollView(
-            child: Column(
-              children: [
-                SeriesSectionHeader(),
-                ComicsSectionHeader(),
-                FilmsSectionHeader(),
-              ],
-            ),
+
+          return Stack(
+            children: [
+              Positioned.fill(
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 50), // Ajoutez le padding ici si nécessaire pour tout le contenu
+                  child: pageContent,
+                ),
+              ),
+              const Positioned(
+                top: 0,
+                left: 0,
+                right: 0,
+                child: CustomHeader(), // Ceci est votre widget en-tête personnalisé
+              ),
+            ],
           );
         },
       ),
@@ -103,3 +108,39 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 }
+
+class CustomHeader extends StatelessWidget {
+  const CustomHeader({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top), // Ajuster pour l'espace de la barre de statut
+      color: Colors.transparent, // Vous pouvez changer la couleur de fond si nécessaire
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 20.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              'Bienvenue !',
+              style: GoogleFonts.nunito(
+                fontWeight: FontWeight.bold,
+                fontSize: 30,
+                color: Colors.white,
+              ),
+            ),
+            SvgPicture.asset(
+              "ressources/Logo.svg",
+              width: 81.2,
+              height: 106.4,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+
+
