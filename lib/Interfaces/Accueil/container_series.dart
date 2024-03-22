@@ -31,7 +31,6 @@ class SeriesSectionHeader extends StatelessWidget {
                   ),
                   margin: const EdgeInsets.only(right: 8.0), // Espacement entre le cercle et le texte
                 ),
-                // Le texte
                 Text(
                   'Series populaires',
                   style: GoogleFonts.nunito(
@@ -42,12 +41,12 @@ class SeriesSectionHeader extends StatelessWidget {
                 ),
               ],
             ),
-            // Modification du bouton "Voir plus" pour le rendre plus petit
+            // Modification du bouton "Voir plus"
             TextButton(
               onPressed: () {},
               style: TextButton.styleFrom(
-                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 4), // Réduit le padding du bouton
-                backgroundColor: const Color(0xFF0F1921).withOpacity(0.5), // Couleur de fond
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                backgroundColor: const Color(0xFF0F1921).withOpacity(0.5),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10), // Rayon de la bordure arrondie
                 ),

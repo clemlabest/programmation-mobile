@@ -1,4 +1,3 @@
-// bottom_navigation_bar.dart
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -15,7 +14,6 @@ class CustomBottomNavigationBar extends StatelessWidget {
     required this.onItemTapped,
   });
 
-  // Déplacez cette méthode hors du widget, car elle ne doit pas être constante.
   Widget _buildSvgIcon(BuildContext context, String assetName, int index) {
     return SvgPicture.asset(
       assetName,
@@ -27,7 +25,6 @@ class CustomBottomNavigationBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Utilisation du BLoC pour réagir aux interactions avec la barre de navigation
     void onItemTapped(int index) {
       context.read<NavigationBloc>().add(NavigationTappedEvent(index));
     }

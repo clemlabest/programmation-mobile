@@ -1,14 +1,14 @@
-import 'package:comics_application/Interfaces/Accueil/container_series.dart';
+import 'package:comics_application/Interfaces/Accueil/container_Films.dart';
 import 'package:flutter/material.dart';
 
-class MySeriesPage extends StatefulWidget {
-  const MySeriesPage({super.key});
+class MyFilmsPage extends StatefulWidget {
+  const MyFilmsPage({super.key});
 
   @override
-  _MySeriesPageState createState() => _MySeriesPageState();
+  _MyFilmsPageState createState() => _MyFilmsPageState();
 }
 
-class _MySeriesPageState extends State<MySeriesPage> {
+class _MyFilmsPageState extends State<MyFilmsPage> {
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +18,7 @@ class _MySeriesPageState extends State<MySeriesPage> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            SeriesSectionHeader(),
+            FilmsSectionHeader(),
           ],
         ),
       ),

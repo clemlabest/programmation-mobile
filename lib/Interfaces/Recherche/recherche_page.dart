@@ -1,14 +1,14 @@
 import 'package:comics_application/Interfaces/Accueil/container_comics.dart';
 import 'package:flutter/material.dart';
 
-class MyComicsPage extends StatefulWidget {
-  const MyComicsPage({super.key});
+class MySearchPage extends StatefulWidget {
+  const MySearchPage({super.key});
 
   @override
-  _MyComicsPageState createState() => _MyComicsPageState();
+  _MySearchPageState createState() => _MySearchPageState();
 }
 
-class _MyComicsPageState extends State<MyComicsPage> {
+class _MySearchPageState extends State<MySearchPage> {
 
   @override
   Widget build(BuildContext context) {
@@ -19,11 +19,9 @@ class _MyComicsPageState extends State<MyComicsPage> {
         child: Column(
           children: [
             ComicsSectionHeader(),
-            // Ici, vous pouvez ajouter d'autres widgets pour le contenu de votre page
           ],
         ),
       ),
-       // Utilisez CustomBottomNavigationBar pour la barre de navigation inférieure
     );
   }
 }
