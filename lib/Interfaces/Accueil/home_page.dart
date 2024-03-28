@@ -26,66 +26,59 @@ class MyHomePage extends StatelessWidget {
       backgroundColor: const Color(0xFF15232E),
       body: BlocBuilder<NavigationBloc, NavigationState>(
         builder: (context, state) {
-          Widget pageContent = const SizedBox(); // Définir une valeur par défaut pour pageContent
-
+          String headerTitle;
+          bool showSearchBar = false;
+          bool showLogo = false;
+          
+          // Define the header title based on the navigation state
           if (state is NavigationInitialState) {
-            // Contenu par défaut pour l'accueil
-            pageContent = const Column(
-              children: [
-                CustomHeader(), // Inclure CustomHeader ici pour l'accueil
-                Expanded(
-                  // Enlever le Padding externe ou ajuster sa valeur selon les besoins
-                  child: SingleChildScrollView(
-                    child: Column(
-                      children: [
-                        SeriesSectionHeader(),
-                        ComicsSectionHeader(),
-                        FilmsSectionHeader(),
-                      ],
-                    ),
-                  ),
-                ),
-              ],
-            );
+            headerTitle = 'Bienvenue !';
+            showLogo = true;
           } else if (state is NavigationSelectedState) {
             switch (state.selectedIndex) {
               case 1:
-                pageContent = const Column(
-                  children: [
-                    CustomHeader(), // Affiche CustomHeader pour l'onglet Comics
-                    Expanded(child: MyComicsPage()),
-                  ],
-                );
+                headerTitle = 'Comics les plus populaires';
                 break;
               case 2:
-                pageContent = const Column(
-                  children: [
-                    CustomHeader(), // Affiche CustomHeader pour l'onglet Comics
-                    Expanded(child: MySeriesPage()),
-                  ],
-                );
+                headerTitle = 'Séries les plus populaires';
                 break;
               case 3:
-                pageContent = const Column(
-                  children: [
-                    CustomHeader(), // Affiche CustomHeader pour l'onglet Comics
-                    Expanded(child: MyFilmsPage()),
-                  ],
-                );
+                headerTitle = 'Films les plus populaires';
                 break;
               case 4:
-                pageContent = const Column(
-                  children: [
-                    CustomHeader(), // Affiche CustomHeader pour l'onglet Comics
-                    Expanded(child: MySearchPage()),
-                  ],
-                );
+                headerTitle = 'Recherche';
+                showSearchBar = true;
                 break;
               default:
-                // Contenu par défaut si aucun index connu n'est sélectionné
-                pageContent = const Column(
+                headerTitle = 'Bienvenue !';
+                showLogo = true;
+                break;
+            }
+          } else {
+            headerTitle = 'Bienvenue !';
+            showLogo = true;
+          }
+
+          // Define the main page content based on the navigation state
+          Widget mainPageContent;
+          if (state is NavigationSelectedState) {
+            switch (state.selectedIndex) {
+              case 1:
+                mainPageContent = const MyComicsPage();
+                break;
+              case 2:
+                mainPageContent = const MySeriesPage();
+                break;
+              case 3:
+                mainPageContent = const MyFilmsPage();
+                break;
+              case 4:
+                mainPageContent = const MySearchPage();
+                break;
+              default:
+                mainPageContent = const Column(
                   children: [
-                    CustomHeader(), // Peut-être voulez-vous afficher CustomHeader ici aussi
+                    CustomHeader(title: '',), // Peut-être voulez-vous afficher CustomHeader ici aussi
                     Expanded(
                       // Enlever ou ajuster le Padding externe selon les besoins
                       child: SingleChildScrollView(
@@ -94,26 +87,33 @@ class MyHomePage extends StatelessWidget {
                             SeriesSectionHeader(),
                             ComicsSectionHeader(),
                             FilmsSectionHeader(),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ],
-                );
+                                    ]
+                            )
+                            )
+                            )
+                            ]
+                            );// Default empty container
+                break;
             }
+          } else {
+            mainPageContent = Container(); // Default empty container
           }
 
-          return pageContent; // Retourne le contenu configuré de la page
+          return Column(
+            children: [
+              if (showSearchBar)
+                const CustomHeaderWithSearch() // If the search bar should be shown based on the tab
+              else
+                CustomHeader(title: headerTitle, showLogo: showLogo),
+              Expanded(child: mainPageContent),
+            ],
+          );
         },
       ),
       bottomNavigationBar: BlocBuilder<NavigationBloc, NavigationState>(
         builder: (context, state) {
-          int selectedIndex = 0;
-          if (state is NavigationSelectedState) {
-            selectedIndex = state.selectedIndex;
-          }
           return CustomBottomNavigationBar(
-            selectedIndex: selectedIndex,
+            selectedIndex: state is NavigationSelectedState ? state.selectedIndex : 0,
             onItemTapped: (index) {
               BlocProvider.of<NavigationBloc>(context).add(NavigationTappedEvent(index));
             },
@@ -124,39 +124,77 @@ class MyHomePage extends StatelessWidget {
   }
 }
 
-
-
-
-
 class CustomHeader extends StatelessWidget {
-  const CustomHeader({super.key});
+  final String title;
+  final bool showLogo;
+
+  const CustomHeader({
+    super.key,
+    required this.title,
+    this.showLogo = false,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top), // Ajuster pour l'espace de la barre de statut
-      color: Colors.transparent, // Vous pouvez changer la couleur de fond si nécessaire
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 20.0),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              'Bienvenue !',
-              style: GoogleFonts.nunito(
-                fontWeight: FontWeight.bold,
-                fontSize: 30,
-                color: Colors.white,
+    return Padding(
+      padding: const EdgeInsets.only(
+        top: 40,
+        left: 16.0,
+        right: 16.0,
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            title,
+            style: GoogleFonts.nunito(
+              fontWeight: FontWeight.bold,
+              fontSize: 30,
+              color: Colors.white,
+            ),
+          ),
+          if (showLogo)
+            SvgPicture.asset(
+              "ressources/Logo.svg", // Adjust the asset path as needed.
+              width: 85,
+              height: 110,
+            ),
+        ],
+      ),
+    );
+  }
+}
+
+class CustomHeaderWithSearch extends StatelessWidget {
+  const CustomHeaderWithSearch({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    // Ensure that a Widget is returned on all code paths.
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const CustomHeader(title: 'Recherche'),
+        Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Container(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            decoration: BoxDecoration(
+              color: Colors.white.withOpacity(0.1), // Adjust opacity as needed
+              borderRadius: BorderRadius.circular(20.0),
+            ),
+            child: TextField(
+              style: const TextStyle(color: Colors.white),
+              decoration: InputDecoration(
+                hintText: 'Comic, film, série...',
+                hintStyle: TextStyle(color: Colors.white.withOpacity(0.5)),
+                border: InputBorder.none,
+                suffixIcon: const Icon(Icons.search, color: Colors.white),
               ),
             ),
-            SvgPicture.asset(
-              "ressources/Logo.svg",
-              width: 81.2,
-              height: 106.4,
-            ),
-          ],
+          ),
         ),
-      ),
+      ],
     );
   }
 }
