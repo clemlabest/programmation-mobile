@@ -14,13 +14,15 @@ class _MyComicsPageState extends State<MyComicsPage> {
   Widget build(BuildContext context) {
     return const Scaffold(
       backgroundColor: Color(0xFF15232E),
-    
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            ComicsSectionHeader(),
-            // Ici, vous pouvez ajouter d'autres widgets pour le contenu de votre page
-          ],
+      body: Padding(
+        padding: EdgeInsets.only(top: 16), // Ajout d'un padding en haut
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              ComicsSectionHeader(),
+              // Ici, vous pouvez ajouter d'autres widgets pour le contenu de votre page
+            ],
+          ),
         ),
       ),
        // Utilisez CustomBottomNavigationBar pour la barre de navigation inférieure

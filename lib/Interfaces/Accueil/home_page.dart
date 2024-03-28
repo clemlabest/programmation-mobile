@@ -37,13 +37,13 @@ class MyHomePage extends StatelessWidget {
           } else if (state is NavigationSelectedState) {
             switch (state.selectedIndex) {
               case 1:
-                headerTitle = 'Comics les plus populaires';
+                headerTitle = 'Comics les plus \npopulaires';
                 break;
               case 2:
-                headerTitle = 'Séries les plus populaires';
+                headerTitle = 'Séries les plus \npopulaires';
                 break;
               case 3:
-                headerTitle = 'Films les plus populaires';
+                headerTitle = 'Films les plus \npopulaires';
                 break;
               case 4:
                 headerTitle = 'Recherche';
