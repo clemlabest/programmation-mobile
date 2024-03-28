@@ -30,37 +30,12 @@ class MyHomePage extends StatelessWidget {
 
           if (state is NavigationInitialState) {
             // Contenu par défaut pour l'accueil
-            pageContent = const SingleChildScrollView(
-              child: Padding(
-                padding: EdgeInsets.only(top: 100), // Ajout d'un padding pour décaler vers le bas
-                child: Column(
-                  children: [
-                    SeriesSectionHeader(),
-                    ComicsSectionHeader(),
-                    FilmsSectionHeader(),
-                  ],
-                ),
-              ),
-            );
-          } else if (state is NavigationSelectedState) {
-            switch (state.selectedIndex) {
-              case 1:
-                pageContent = const MyComicsPage();
-                break;
-              case 2:
-                pageContent = const MySeriesPage();
-                break;
-              case 3:
-                pageContent = const MyFilmsPage();
-                break;
-              case 4:
-                pageContent = const MySearchPage();
-                break;
-              default:
-                // Si l'index n'est pas géré, on affiche le contenu par défaut
-                pageContent = const SingleChildScrollView(
-                  child: Padding(
-                    padding: EdgeInsets.only(top: 100),
+            pageContent = const Column(
+              children: [
+                CustomHeader(), // Inclure CustomHeader ici pour l'accueil
+                Expanded(
+                  // Enlever le Padding externe ou ajuster sa valeur selon les besoins
+                  child: SingleChildScrollView(
                     child: Column(
                       children: [
                         SeriesSectionHeader(),
@@ -69,26 +44,66 @@ class MyHomePage extends StatelessWidget {
                       ],
                     ),
                   ),
+                ),
+              ],
+            );
+          } else if (state is NavigationSelectedState) {
+            switch (state.selectedIndex) {
+              case 1:
+                pageContent = const Column(
+                  children: [
+                    CustomHeader(), // Affiche CustomHeader pour l'onglet Comics
+                    Expanded(child: MyComicsPage()),
+                  ],
+                );
+                break;
+              case 2:
+                pageContent = const Column(
+                  children: [
+                    CustomHeader(), // Affiche CustomHeader pour l'onglet Comics
+                    Expanded(child: MySeriesPage()),
+                  ],
+                );
+                break;
+              case 3:
+                pageContent = const Column(
+                  children: [
+                    CustomHeader(), // Affiche CustomHeader pour l'onglet Comics
+                    Expanded(child: MyFilmsPage()),
+                  ],
+                );
+                break;
+              case 4:
+                pageContent = const Column(
+                  children: [
+                    CustomHeader(), // Affiche CustomHeader pour l'onglet Comics
+                    Expanded(child: MySearchPage()),
+                  ],
+                );
+                break;
+              default:
+                // Contenu par défaut si aucun index connu n'est sélectionné
+                pageContent = const Column(
+                  children: [
+                    CustomHeader(), // Peut-être voulez-vous afficher CustomHeader ici aussi
+                    Expanded(
+                      // Enlever ou ajuster le Padding externe selon les besoins
+                      child: SingleChildScrollView(
+                        child: Column(
+                          children: [
+                            SeriesSectionHeader(),
+                            ComicsSectionHeader(),
+                            FilmsSectionHeader(),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
                 );
             }
           }
 
-          return Stack(
-            children: [
-              Positioned.fill(
-                child: Padding(
-                  padding: const EdgeInsets.only(top: 50), // Ajoutez le padding ici si nécessaire pour tout le contenu
-                  child: pageContent,
-                ),
-              ),
-              const Positioned(
-                top: 0,
-                left: 0,
-                right: 0,
-                child: CustomHeader(), // Ceci est votre widget en-tête personnalisé
-              ),
-            ],
-          );
+          return pageContent; // Retourne le contenu configuré de la page
         },
       ),
       bottomNavigationBar: BlocBuilder<NavigationBloc, NavigationState>(
@@ -108,6 +123,10 @@ class MyHomePage extends StatelessWidget {
     );
   }
 }
+
+
+
+
 
 class CustomHeader extends StatelessWidget {
   const CustomHeader({super.key});
