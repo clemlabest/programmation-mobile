@@ -32,14 +32,13 @@ class _ComicsSectionHeaderState extends State<ComicsSectionHeader> {
       setState(() {
         isLoading = false;
       });
-      print(e.toString()); // Inform the user of the error in a real app.
     }
   }
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 16.0, right: 15, left: 15),
+      padding: const EdgeInsets.only(bottom: 15, right: 15, left: 15),
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
         decoration: BoxDecoration(
@@ -70,12 +69,11 @@ class _ComicsSectionHeaderState extends State<ComicsSectionHeader> {
                       fontSize: 20,
                     ),
                   ),
-                  Spacer(), // This will push the button to the end of the Row
+                  const Spacer(), // This will push the button to the end of the Row
                   Padding(
                     padding: const EdgeInsets.only(left: 20.0), // Increased space before the button
                     child: TextButton(
                       onPressed: () {
-                        // TODO: Implement view more comics logic
                       },
                       style: TextButton.styleFrom(
                         padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -94,53 +92,58 @@ class _ComicsSectionHeaderState extends State<ComicsSectionHeader> {
               ),
             ),
             if (isLoading)
-              const CircularProgressIndicator()
-            else
-              SizedBox(
-                height: 200, // Adjust the height as needed
-                child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: comicsList.length,
-                  itemBuilder: (context, index) {
-                    final comic = comicsList[index];
-                    final imageInfo = comic['image'] ?? {};
-                    final thumbnailUrl = imageInfo['small_url'] ?? 'https://placekitten.com/200/300'; // Placeholder image
-                    return Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 8.0), // Padding between each comic card
-                      child: Container(
-                        width: 140, // Adjust the width as needed
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          color: const Color(0xFF284C6A), // Background color for items
-                        ),
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(10),
-                          child: Stack(
-                            children: [
-                              Image.network(thumbnailUrl, fit: BoxFit.cover), // The comic's image
-                              Align(
-                                alignment: Alignment.bottomCenter,
-                                child: Container(
-                                  padding: const EdgeInsets.all(8.0),
-                                  color: Colors.black.withOpacity(0.5), // Semi-transparent overlay for text
-                                  child: Text(
-                                    comic['name'] ?? 'Unknown title',
-                                    style: GoogleFonts.nunito(
-                                      color: Colors.white,
-                                      fontSize: 17,
-                                    ),
-                                    textAlign: TextAlign.center,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    );
-                  },
+  const CircularProgressIndicator()
+else
+  SizedBox(
+    height: 200, // Hauteur de votre liste
+    child: ListView.builder(
+      scrollDirection: Axis.horizontal,
+      itemCount: comicsList.length,
+      itemBuilder: (context, index) {
+        final comic = comicsList[index];
+        final imageInfo = comic['image'] ?? {};
+        final thumbnailUrl = imageInfo['thumb_url'] ?? 'https://placekitten.com/200/200'; // Une image de remplacement en carré
+
+        return Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 8.0), // Espacement entre les cartes de comics
+          child: Container(
+            width: 140, // La largeur de chaque conteneur de comic
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+              color: const Color(0xFF284C6A), // Couleur de fond de l'élément
+            ),
+            child: Column(
+              children: [
+                AspectRatio(
+                  aspectRatio: 1.0, // L'image sera carrée
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(10), // Arrondir les coins de l'image
+                    child: Image.network(
+                      thumbnailUrl,
+                      fit: BoxFit.cover, // Cela permet de couvrir tout l'espace disponible
+                    ),
+                  ),
                 ),
-              ),
+                Expanded(
+                  child: Container(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      comic['name'] ?? 'Titre inconnu',
+                      style: GoogleFonts.nunito(
+                        color: Colors.white,
+                        fontSize: 17,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    ),
+  ),
           ],
         ),
       ),

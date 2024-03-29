@@ -8,8 +8,6 @@ import 'package:comics_application/Interfaces/Comics/comics_page.dart';
 import 'package:comics_application/Interfaces/Series/series_page.dart';
 import 'package:comics_application/Interfaces/Films/films_page.dart';
 import 'package:comics_application/Interfaces/Recherche/recherche_page.dart';
-// Supposant que CustomHeader est le nouveau widget d'en-tête sans AppBar
-import 'package:comics_application/Interfaces/Accueil/appbar.dart';
 import 'package:comics_application/Interfaces/Accueil/container_comics.dart';
 import 'package:comics_application/Interfaces/Accueil/container_series.dart';
 import 'package:comics_application/Interfaces/Accueil/container_films.dart';
@@ -78,7 +76,6 @@ class MyHomePage extends StatelessWidget {
               default:
                 mainPageContent = const Column(
                   children: [
-                    CustomHeader(title: '',), // Peut-être voulez-vous afficher CustomHeader ici aussi
                     Expanded(
                       // Enlever ou ajuster le Padding externe selon les besoins
                       child: SingleChildScrollView(
@@ -92,11 +89,26 @@ class MyHomePage extends StatelessWidget {
                             )
                             )
                             ]
-                            );// Default empty container
+                            );
                 break;
             }
           } else {
-            mainPageContent = Container(); // Default empty container
+            mainPageContent = const Column(
+                  children: [
+                    Expanded(
+                      // Enlever ou ajuster le Padding externe selon les besoins
+                      child: SingleChildScrollView(
+                        child: Column(
+                          children: [
+                            SeriesSectionHeader(),
+                            ComicsSectionHeader(),
+                            FilmsSectionHeader(),
+                                    ]
+                            )
+                            )
+                            )
+                            ]
+                            );
           }
 
           return Column(

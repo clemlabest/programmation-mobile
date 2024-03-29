@@ -23,15 +23,16 @@ class _MyComicsPageState extends State<MyComicsPage> {
   Future<void> fetchComics() async {
     try {
       final data = await apiClient.getEndpointData('issues');
+      if (!mounted) return; // Vérifiez si le widget est toujours monté avant de mettre à jour l'état
       setState(() {
         comicsList = data['results'];
         isLoading = false;
       });
     } catch (e) {
+      if (!mounted) return; // Vérifiez aussi ici si le widget est toujours monté
       setState(() {
         isLoading = false;
       });
-      print(e.toString()); // Dans une véritable application, vous informeriez également l'utilisateur de l'erreur.
     }
   }
 
