@@ -23,7 +23,7 @@ class _SeriesSectionHeaderState extends State<SeriesSectionHeader> {
 
   Future<void> fetchSeries() async {
     try {
-      final data = await apiClient.getEndpointData('movies');
+      final data = await apiClient.getEndpointData('series_list');
       setState(() {
         seriesList = data['results'];
         isLoading = false;
