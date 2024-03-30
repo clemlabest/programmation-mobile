@@ -90,7 +90,7 @@ class SeriesDetailPageState extends State<SeriesDetailPage> {
                   child: Image.network(
                     imageUrl,
                     width: 100,
-                    height: 150,
+                    height: 140,
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -105,6 +105,26 @@ class SeriesDetailPageState extends State<SeriesDetailPage> {
                       buildDetailItem(context, "ressources/BottomNavigationBar/ic_calendar_bicolor.svg", '', startYear),
                     ],
                   ),
+                ),
+              ],
+            ),
+          ),
+          Container(
+            color: const Color(0xFF15232E),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                TextButton(
+                  onPressed: () {},
+                  child: const Text('Histoire', style: TextStyle(color: Colors.white)),
+                ),
+                TextButton(
+                  onPressed: () {},
+                  child: const Text('Personnages', style: TextStyle(color: Colors.white)),
+                ),
+                TextButton(
+                  onPressed: () {},
+                  child: const Text('Épisodes', style: TextStyle(color: Colors.white)),
                 ),
               ],
             ),
