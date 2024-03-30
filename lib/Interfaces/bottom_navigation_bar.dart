@@ -15,13 +15,17 @@ class CustomBottomNavigationBar extends StatelessWidget {
   });
 
   Widget _buildSvgIcon(BuildContext context, String assetName, int index) {
-    return SvgPicture.asset(
-      assetName,
-      width: 24.0,
-      height: 24.0,
-      color: selectedIndex == index ? const Color(0xFF12273C) : const Color(0xFF778BA8),
-    );
-  }
+  return SvgPicture.asset(
+    assetName,
+    width: 24.0,
+    height: 24.0,
+    colorFilter: ColorFilter.mode(
+      selectedIndex == index ? const Color(0xFF12273C) : const Color(0xFF778BA8),
+      BlendMode.srcIn,
+    ),
+  );
+}
+
 
   @override
   Widget build(BuildContext context) {
