@@ -44,32 +44,31 @@ class SeriesDetailPageState extends State<SeriesDetailPage> {
       assetName,
       width: 20,
       height: 20,
-      color: Colors.white,
+      colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn,),
     );
   }
 
   @override
   Widget build(BuildContext context) {
     final title = seriesDetails?['name'] as String? ?? 'Chargement...';
+    final summary = seriesDetails?['deck'] as String? ?? 'Résumé non disponible.';
 
     return Scaffold(
       appBar: AppBar(
         title: Text(
           isLoading ? 'Chargement...' : title,
-          style: const TextStyle(color: Colors.white), // Titre en blanc
+          style: const TextStyle(color: Colors.white),
         ),
         backgroundColor: const Color(0xFF15232E),
-        iconTheme: const IconThemeData(
-          color: Colors.white, // Bouton retour en blanc
-        ),
+        iconTheme: const IconThemeData(color: Colors.white),
       ),
       body: isLoading
           ? const Center(child: CircularProgressIndicator())
-          : buildContent(context),
+          : buildContent(context, summary),
     );
   }
 
-  Widget buildContent(BuildContext context) {
+  Widget buildContent(BuildContext context, String summary) {
     final imageUrl = seriesDetails?['image']?['original_url'] as String? ?? 'https://placekitten.com/200/300';
     final publisher = seriesDetails?['publisher']?['name'] as String? ?? 'Inconnu';
     final countOfEpisodes = seriesDetails?['count_of_episodes']?.toString() ?? '0';
@@ -99,10 +98,9 @@ class SeriesDetailPageState extends State<SeriesDetailPage> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const SizedBox(height: 8),
-                      buildDetailItem(context, "ressources/BottomNavigationBar/ic_publisher_bicolor.svg", '', publisher),
-                      buildDetailItem(context, "ressources/BottomNavigationBar/ic_tv_bicolor.svg", countOfEpisodes,' épisodes'),
-                      buildDetailItem(context, "ressources/BottomNavigationBar/ic_calendar_bicolor.svg", '', startYear),
+                      buildDetailItem(context, "ressources/BottomNavigationBar/ic_publisher_bicolor.svg", publisher),
+                      buildDetailItem(context, "ressources/BottomNavigationBar/ic_tv_bicolor.svg", '$countOfEpisodes épisodes'),
+                      buildDetailItem(context, "ressources/BottomNavigationBar/ic_calendar_bicolor.svg", startYear),
                     ],
                   ),
                 ),
@@ -115,36 +113,46 @@ class SeriesDetailPageState extends State<SeriesDetailPage> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 TextButton(
-                  onPressed: () {},
-                  child: const Text('Histoire', style: TextStyle(color: Colors.white)),
+                  onPressed: () {
+                    // Logic for displaying the story goes here
+                  },
+                  child: const Text('Histoire', style: TextStyle(color: Colors.white, fontSize: 18)),
                 ),
                 TextButton(
-                  onPressed: () {},
-                  child: const Text('Personnages', style: TextStyle(color: Colors.white)),
+                  onPressed: () {
+                    // Logic for displaying characters goes here
+                  },
+                  child: const Text('Personnages', style: TextStyle(color: Colors.white, fontSize: 18)),
                 ),
                 TextButton(
-                  onPressed: () {},
-                  child: const Text('Épisodes', style: TextStyle(color: Colors.white)),
+                  onPressed: () {
+                    // Logic for displaying episodes goes here
+                  },
+                  child: const Text('Épisodes', style: TextStyle(color: Colors.white, fontSize: 18)),
                 ),
               ],
             ),
           ),
-          // Rest of the UI goes here
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Text(
+              summary,
+              style: const TextStyle(fontSize: 16, color: Colors.black),
+            ),
+          ),
         ],
       ),
     );
   }
 
-  Widget buildDetailItem(BuildContext context, String iconPath, String label, String value) {
+  Widget buildDetailItem(BuildContext context, String iconPath, String value) {
     return Padding(
-      padding: const EdgeInsets.only(top: 8.0),
+      padding: const EdgeInsets.symmetric(vertical: 8.0),
       child: Row(
         children: [
           _buildSvgIcon(iconPath),
           const SizedBox(width: 8),
-          Text(label, style: const TextStyle(fontSize: 16, color: Colors.grey)),
-          const SizedBox(width: 4),
-          Text(value, style: const TextStyle(fontSize: 16, color: Colors.white)),
+          Expanded(child: Text(value, style: const TextStyle(fontSize: 16, color: Colors.white))),
         ],
       ),
     );

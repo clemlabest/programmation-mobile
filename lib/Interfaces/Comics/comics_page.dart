@@ -5,10 +5,10 @@ class MyComicsPage extends StatefulWidget {
   const MyComicsPage({super.key});
 
   @override
-  _MyComicsPageState createState() => _MyComicsPageState();
+  MyComicsPageState createState() => MyComicsPageState();
 }
 
-class _MyComicsPageState extends State<MyComicsPage> {
+class MyComicsPageState extends State<MyComicsPage> {
   late final ComicVineAPI apiClient;
   List<dynamic> comicsList = [];
   bool isLoading = true;
