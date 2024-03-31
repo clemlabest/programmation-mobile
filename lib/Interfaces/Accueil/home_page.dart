@@ -28,7 +28,6 @@ class MyHomePage extends StatelessWidget {
           bool showSearchBar = false;
           bool showLogo = false;
           
-          // Define the header title based on the navigation state
           if (state is NavigationInitialState) {
             headerTitle = 'Bienvenue !';
             showLogo = true;
@@ -57,7 +56,6 @@ class MyHomePage extends StatelessWidget {
             showLogo = true;
           }
 
-          // Define the main page content based on the navigation state
           Widget mainPageContent;
           if (state is NavigationSelectedState) {
             switch (state.selectedIndex) {
@@ -77,7 +75,6 @@ class MyHomePage extends StatelessWidget {
                 mainPageContent = const Column(
                   children: [
                     Expanded(
-                      // Enlever ou ajuster le Padding externe selon les besoins
                       child: SingleChildScrollView(
                         child: Column(
                           children: [
@@ -96,7 +93,6 @@ class MyHomePage extends StatelessWidget {
             mainPageContent = const Column(
                   children: [
                     Expanded(
-                      // Enlever ou ajuster le Padding externe selon les besoins
                       child: SingleChildScrollView(
                         child: Column(
                           children: [
@@ -114,7 +110,7 @@ class MyHomePage extends StatelessWidget {
           return Column(
             children: [
               if (showSearchBar)
-                const CustomHeaderWithSearch() // If the search bar should be shown based on the tab
+                const CustomHeaderWithSearch()
               else
                 CustomHeader(title: headerTitle, showLogo: showLogo),
               Expanded(child: mainPageContent),
@@ -167,7 +163,7 @@ class CustomHeader extends StatelessWidget {
           ),
           if (showLogo)
             SvgPicture.asset(
-              "ressources/Logo.svg", // Adjust the asset path as needed.
+              "ressources/Logo.svg", 
               width: 85,
               height: 110,
             ),
@@ -182,7 +178,6 @@ class CustomHeaderWithSearch extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Ensure that a Widget is returned on all code paths.
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -192,7 +187,7 @@ class CustomHeaderWithSearch extends StatelessWidget {
           child: Container(
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
             decoration: BoxDecoration(
-              color: Colors.white.withOpacity(0.1), // Adjust opacity as needed
+              color: Colors.white.withOpacity(0.1),
               borderRadius: BorderRadius.circular(20.0),
             ),
             child: TextField(

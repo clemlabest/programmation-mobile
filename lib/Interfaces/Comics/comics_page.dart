@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../API/api.dart';
-import 'comics_detail_page.dart'; // Remplacez par le chemin correct de votre page de détails
+import 'comics_detail_page.dart';
 
 class MyComicsPage extends StatefulWidget {
   const MyComicsPage({super.key});
@@ -17,13 +17,13 @@ class MyComicsPageState extends State<MyComicsPage> {
   @override
   void initState() {
     super.initState();
-    apiClient = ComicVineAPI(apiKey: '91901ce3797af349853aa79db4730e1aded30eef'); // Utilisez votre clé API réelle ici
+    apiClient = ComicVineAPI(apiKey: '91901ce3797af349853aa79db4730e1aded30eef');
     fetchComics();
   }
 
   Future<void> fetchComics() async {
     try {
-      final data = await apiClient.getEndpointData('issues'); // Assurez-vous que c'est le bon endpoint
+      final data = await apiClient.getEndpointData('issues');
       if (!mounted) return;
       setState(() {
         comicsList = data['results'];
@@ -87,7 +87,7 @@ class MyComicsPageState extends State<MyComicsPage> {
                                   style: const TextStyle(fontSize: 17, color: Colors.white, fontWeight: FontWeight.bold),
                                 ),
                                 Text(
-                                  'Année : ${comics['start_year'] ?? 'Inconnue'}',
+                                  'Année : ${comics['store_date'] ?? 'Inconnue'}',
                                   style: const TextStyle(fontSize: 15, color: Colors.white70),
                                 ),
                               ],

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import '../../API/api.dart'; // Assurez-vous que cet import pointe vers votre fichier api.dart
+import '../../API/api.dart';
 
 class FilmsSectionHeader extends StatefulWidget {
   const FilmsSectionHeader({super.key});
@@ -17,7 +17,7 @@ class FilmsSectionHeaderState extends State<FilmsSectionHeader> {
   @override
   void initState() {
     super.initState();
-    apiClient = ComicVineAPI(apiKey: '91901ce3797af349853aa79db4730e1aded30eef'); // Utilisez votre clé API réelle ici
+    apiClient = ComicVineAPI(apiKey: '91901ce3797af349853aa79db4730e1aded30eef');
     fetchMovies();
   }
 
@@ -101,7 +101,7 @@ class FilmsSectionHeaderState extends State<FilmsSectionHeader> {
                   itemBuilder: (context, index) {
                     final movie = moviesList[index];
                     final imageInfo = movie['image'] ?? {};
-                    final thumbnailUrl = imageInfo['small_url'] ?? 'https://placekitten.com/200/200'; // Image de remplacement
+                    final thumbnailUrl = imageInfo['small_url'] ?? 'https://placekitten.com/200/200';
 
                     return Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 8.0),

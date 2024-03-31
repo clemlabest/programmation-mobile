@@ -16,7 +16,7 @@ class _MySearchPageState extends State<MySearchPage> {
       backgroundColor: const Color(0xFF15232E),
       body: Column(
         children: [
-          const SizedBox(height: 40), // Ajoutez un espace en haut
+          const SizedBox(height: 40),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
             child: TextField(
@@ -43,15 +43,12 @@ class _MySearchPageState extends State<MySearchPage> {
             child: SingleChildScrollView(
               child: Column(
                 children: [
-                  // Affichez vos résultats de recherche ici
-                  // Vous pouvez créer des widgets dynamiquement basés sur searchText
-                  // Par exemple:
                   if (searchText.contains('comics'))
-                    ...[ /* Vos widgets comics ici basés sur la recherche */ ],
+                    ...[ ],
                   if (searchText.contains('films'))
-                    ...[ /* Vos widgets films ici basés sur la recherche */ ],
+                    ...[ ],
                   if (searchText.contains('séries'))
-                    ...[ /* Vos widgets séries ici basés sur la recherche */ ],
+                    ...[ ],
                 ],
               ),
             ),

@@ -114,19 +114,16 @@ class SeriesDetailPageState extends State<SeriesDetailPage> {
               children: [
                 TextButton(
                   onPressed: () {
-                    // Logic for displaying the story goes here
                   },
                   child: const Text('Histoire', style: TextStyle(color: Colors.white, fontSize: 18)),
                 ),
                 TextButton(
                   onPressed: () {
-                    // Logic for displaying characters goes here
                   },
                   child: const Text('Personnages', style: TextStyle(color: Colors.white, fontSize: 18)),
                 ),
                 TextButton(
                   onPressed: () {
-                    // Logic for displaying episodes goes here
                   },
                   child: const Text('Épisodes', style: TextStyle(color: Colors.white, fontSize: 18)),
                 ),

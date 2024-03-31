@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import '../../API/api.dart'; // Assurez-vous que cet import pointe vers votre fichier api.dart
+import '../../API/api.dart';
 
 class ComicsSectionHeader extends StatefulWidget {
   const ComicsSectionHeader({super.key});
@@ -69,9 +69,9 @@ class ComicsSectionHeaderState extends State<ComicsSectionHeader> {
                       fontSize: 20,
                     ),
                   ),
-                  const Spacer(), // This will push the button to the end of the Row
+                  const Spacer(),
                   Padding(
-                    padding: const EdgeInsets.only(left: 20.0), // Increased space before the button
+                    padding: const EdgeInsets.only(left: 20.0),
                     child: TextButton(
                       onPressed: () {
                       },
@@ -95,32 +95,32 @@ class ComicsSectionHeaderState extends State<ComicsSectionHeader> {
   const CircularProgressIndicator()
 else
   SizedBox(
-    height: 200, // Hauteur de votre liste
+    height: 200,
     child: ListView.builder(
       scrollDirection: Axis.horizontal,
       itemCount: comicsList.length,
       itemBuilder: (context, index) {
         final comic = comicsList[index];
         final imageInfo = comic['image'] ?? {};
-        final thumbnailUrl = imageInfo['thumb_url'] ?? 'https://placekitten.com/200/200'; // Une image de remplacement en carré
+        final thumbnailUrl = imageInfo['thumb_url'] ?? 'https://placekitten.com/200/200';
 
         return Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 8.0), // Espacement entre les cartes de comics
+          padding: const EdgeInsets.symmetric(horizontal: 8.0),
           child: Container(
-            width: 140, // La largeur de chaque conteneur de comic
+            width: 140,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
-              color: const Color(0xFF284C6A), // Couleur de fond de l'élément
+              color: const Color(0xFF284C6A),
             ),
             child: Column(
               children: [
                 AspectRatio(
-                  aspectRatio: 1.0, // L'image sera carrée
+                  aspectRatio: 1.0,
                   child: ClipRRect(
-                    borderRadius: BorderRadius.circular(10), // Arrondir les coins de l'image
+                    borderRadius: BorderRadius.circular(10),
                     child: Image.network(
                       thumbnailUrl,
-                      fit: BoxFit.cover, // Cela permet de couvrir tout l'espace disponible
+                      fit: BoxFit.cover,
                     ),
                   ),
                 ),

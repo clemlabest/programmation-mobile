@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../API/api.dart';
-import 'films_detail_page.dart'; // Remplacez par le chemin correct de votre page de détails
+import 'films_detail_page.dart';
 
 class MyFilmsPage extends StatefulWidget {
   const MyFilmsPage({super.key});
@@ -17,13 +17,13 @@ class MyFilmsPageState extends State<MyFilmsPage> {
   @override
   void initState() {
     super.initState();
-    apiClient = ComicVineAPI(apiKey: '91901ce3797af349853aa79db4730e1aded30eef'); // Utilisez votre clé API réelle ici
+    apiClient = ComicVineAPI(apiKey: '91901ce3797af349853aa79db4730e1aded30eef');
     fetchFilms();
   }
 
   Future<void> fetchFilms() async {
     try {
-      final data = await apiClient.getEndpointData('movies'); // Assurez-vous que c'est le bon endpoint
+      final data = await apiClient.getEndpointData('movies');
       if (!mounted) return;
       setState(() {
         filmsList = data['results'];

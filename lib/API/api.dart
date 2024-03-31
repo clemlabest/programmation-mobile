@@ -8,7 +8,6 @@ class ComicVineAPI {
   ComicVineAPI({required this.apiKey});
 
   Future<Map<String, dynamic>> getEndpointData(String endpoint) async {
-    // Utiliser des variables pour construire l'URL, pas des chaînes littérales
     final url = Uri.parse('$baseUrl/$endpoint?api_key=$apiKey&format=json');
     final response = await http.get(url);
 
