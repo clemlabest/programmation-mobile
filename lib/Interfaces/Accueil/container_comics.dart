@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'dart:math' as math; // Importez ce paquet pour utiliser min
 import '../../API/api.dart';
 
 class ComicsSectionHeader extends StatefulWidget {
@@ -74,6 +75,7 @@ class ComicsSectionHeaderState extends State<ComicsSectionHeader> {
                     padding: const EdgeInsets.only(left: 20.0),
                     child: TextButton(
                       onPressed: () {
+                        // Logic for viewing more
                       },
                       style: TextButton.styleFrom(
                         padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -92,58 +94,58 @@ class ComicsSectionHeaderState extends State<ComicsSectionHeader> {
               ),
             ),
             if (isLoading)
-  const CircularProgressIndicator()
-else
-  SizedBox(
-    height: 200,
-    child: ListView.builder(
-      scrollDirection: Axis.horizontal,
-      itemCount: comicsList.length,
-      itemBuilder: (context, index) {
-        final comic = comicsList[index];
-        final imageInfo = comic['image'] ?? {};
-        final thumbnailUrl = imageInfo['thumb_url'] ?? 'https://placekitten.com/200/200';
+              const CircularProgressIndicator()
+            else
+              SizedBox(
+                height: 200,
+                child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: math.min(comicsList.length, 5), // Limitez ici le nombre d'éléments à 5
+                  itemBuilder: (context, index) {
+                    final comic = comicsList[index];
+                    final imageInfo = comic['image'] ?? {};
+                    final thumbnailUrl = imageInfo['thumb_url'] ?? 'https://placekitten.com/200/200';
 
-        return Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 8.0),
-          child: Container(
-            width: 140,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10),
-              color: const Color(0xFF284C6A),
-            ),
-            child: Column(
-              children: [
-                AspectRatio(
-                  aspectRatio: 1.0,
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(10),
-                    child: Image.network(
-                      thumbnailUrl,
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                ),
-                Expanded(
-                  child: Container(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text(
-                      comic['name'] ?? 'Titre inconnu',
-                      style: GoogleFonts.nunito(
-                        color: Colors.white,
-                        fontSize: 17,
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                      child: Container(
+                        width: 140,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: const Color(0xFF284C6A),
+                        ),
+                        child: Column(
+                          children: [
+                            AspectRatio(
+                              aspectRatio: 1.0,
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(10),
+                                child: Image.network(
+                                  thumbnailUrl,
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                            ),
+                            Expanded(
+                              child: Container(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Text(
+                                  comic['name'] ?? 'Titre inconnu',
+                                  style: GoogleFonts.nunito(
+                                    color: Colors.white,
+                                    fontSize: 17,
+                                  ),
+                                  textAlign: TextAlign.center,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
-                      textAlign: TextAlign.center,
-                    ),
-                  ),
+                    );
+                  },
                 ),
-              ],
-            ),
-          ),
-        );
-      },
-    ),
-  ),
+              ),
           ],
         ),
       ),

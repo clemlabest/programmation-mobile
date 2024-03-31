@@ -131,7 +131,7 @@ setState(() {
                 TextButton(
                   onPressed: () {
                   },
-                  child: const Text('Épisodes', style: TextStyle(color: Colors.white, fontSize: 18)),
+                  child: const Text('Infos', style: TextStyle(color: Colors.white, fontSize: 18)),
                 ),
               ],
             ),

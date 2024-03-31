@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'dart:math' as math; // Importez ce paquet pour utiliser min
 import '../../API/api.dart';
 
 class SeriesSectionHeader extends StatefulWidget {
@@ -73,7 +74,9 @@ class SeriesSectionHeaderState extends State<SeriesSectionHeader> {
                   Padding(
                     padding: const EdgeInsets.only(left: 20.0),
                     child: TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        // Logic for viewing more
+                      },
                       style: TextButton.styleFrom(
                         padding: const EdgeInsets.symmetric(horizontal: 20),
                         backgroundColor: const Color(0xFF0F1921).withOpacity(0.5),
@@ -97,7 +100,7 @@ class SeriesSectionHeaderState extends State<SeriesSectionHeader> {
                 height: 200,
                 child: ListView.builder(
                   scrollDirection: Axis.horizontal,
-                  itemCount: seriesList.length,
+                  itemCount: math.min(seriesList.length, 5), // Limitez ici le nombre d'éléments à 5
                   itemBuilder: (context, index) {
                     final series = seriesList[index];
                     final imageInfo = series['image'] ?? {};

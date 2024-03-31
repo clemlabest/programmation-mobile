@@ -14,7 +14,7 @@ class ComicVineAPI {
     if (response.statusCode == 200) {
       return json.decode(response.body);
     } else {
-      throw Exception('Failed to load data from ComicVine API');
+      throw Exception('Erreur chargement des données de ComicVine API');
     }
   }
 }

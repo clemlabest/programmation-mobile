@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'dart:math' as math; // Importez ce paquet pour utiliser min
 import '../../API/api.dart';
 
 class FilmsSectionHeader extends StatefulWidget {
@@ -73,7 +74,9 @@ class FilmsSectionHeaderState extends State<FilmsSectionHeader> {
                   Padding(
                     padding: const EdgeInsets.only(left: 20.0),
                     child: TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        // Logic for viewing more
+                      },
                       style: TextButton.styleFrom(
                         padding: const EdgeInsets.symmetric(horizontal: 20),
                         backgroundColor: const Color(0xFF0F1921).withOpacity(0.5),
@@ -97,7 +100,7 @@ class FilmsSectionHeaderState extends State<FilmsSectionHeader> {
                 height: 200,
                 child: ListView.builder(
                   scrollDirection: Axis.horizontal,
-                  itemCount: moviesList.length,
+                  itemCount: math.min(moviesList.length, 5), // Limitez ici le nombre d'éléments à 5
                   itemBuilder: (context, index) {
                     final movie = moviesList[index];
                     final imageInfo = movie['image'] ?? {};

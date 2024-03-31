@@ -125,13 +125,14 @@ class ComicsDetailPageState extends State<ComicsDetailPage> {
                 TextButton(
                   onPressed: () {
                   },
-                  child: const Text('Personnages', style: TextStyle(color: Colors.white, fontSize: 18)),
+                  child: const Text('Auteurs', style: TextStyle(color: Colors.white, fontSize: 18)),
                 ),
                 TextButton(
                   onPressed: () {
                   },
-                  child: const Text('Épisodes', style: TextStyle(color: Colors.white, fontSize: 18)),
+                  child: const Text('Personnages', style: TextStyle(color: Colors.white, fontSize: 18)),
                 ),
+                
               ],
             ),
           ),
