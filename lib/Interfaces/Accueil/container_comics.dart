@@ -6,10 +6,10 @@ class ComicsSectionHeader extends StatefulWidget {
   const ComicsSectionHeader({super.key});
 
   @override
-  _ComicsSectionHeaderState createState() => _ComicsSectionHeaderState();
+  ComicsSectionHeaderState createState() => ComicsSectionHeaderState();
 }
 
-class _ComicsSectionHeaderState extends State<ComicsSectionHeader> {
+class ComicsSectionHeaderState extends State<ComicsSectionHeader> {
   late final ComicVineAPI apiClient;
   List<dynamic> comicsList = [];
   bool isLoading = true;

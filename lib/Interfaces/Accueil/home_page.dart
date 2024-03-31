@@ -81,8 +81,8 @@ class MyHomePage extends StatelessWidget {
                       child: SingleChildScrollView(
                         child: Column(
                           children: [
-                            SeriesSectionHeader(),
                             ComicsSectionHeader(),
+                            SeriesSectionHeader(),
                             FilmsSectionHeader(),
                                     ]
                             )
